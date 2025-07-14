@@ -1,17 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+// src/index.js (혹은 여러분의 프로젝트 진입점 파일)
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom"; // BrowserRouter 임포트
+import App from "./App";
+import "./index.css"; // 전역 CSS
+
+// LanguageProvider도 App 위에 있어야 합니다.
+import { LanguageProvider } from "./context/LanguageContext";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <LanguageProvider>
+      {" "}
+      {/* LanguageProvider로 감싸기 */}
+      <BrowserRouter>
+        {" "}
+        {/* App 컴포넌트를 BrowserRouter로 감싸기 */}
+        <App />
+      </BrowserRouter>
+    </LanguageProvider>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

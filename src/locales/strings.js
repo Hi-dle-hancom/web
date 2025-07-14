@@ -1,0 +1,437 @@
+const strings = {
+  ko: {
+    header: {
+      autodesk: "HAPA",
+      globeIcon: "🌐", // 지구본 이모지
+      personIcon: "👤", // 사람 이모지
+      login: "로그인",
+      products: "제품",
+      chat: "채팅",
+      support: "지원",
+      learn: "학습",
+      community: "커뮤니티",
+      signup: "회원가입",
+      currentLanguageDisplay: "KR", // 언어 버튼에 표시될 텍스트
+      koSelectedMessage: "한국어입니다", // 한국어 선택 시 메시지
+      enSelectedMessage: "영어입니다", // 영어 선택 시 메시지
+      productsSelectedMessage: "제품입니다", // 제품 버튼 메시지
+      supportSelectedMessage: "지원입니다", // 지원 버튼 메시지
+      learnSelectedMessage: "학습입니다", // 학습 버튼 메시지
+      communitySelectedMessage: "커뮤니티입니다", // 커뮤니티 버튼 메시지
+    },
+    footer: {
+      copyright: "Copyright",
+      location: "Magok, Seoul, Republic of Korea",
+      tel: "Tel: 010-7184-7619",
+    },
+    homePage: {
+      titlePart1: "HAPA",
+      titlePart2: "당신을 위한 Python 프로그래머",
+      exploreButton: "살펴보기",
+    },
+    loginPage: {
+      title: "HAPA 계정 로그인",
+      welcomeMessage: "환영합니다, ",
+      idLabel: "아이디 또는 이메일",
+      idPlaceholder: "아이디 또는 이메일 주소를 입력하세요",
+      passwordLabel: "비밀번호",
+      passwordPlaceholder: "비밀번호를 입력하세요",
+      loginButton: "로그인",
+      signupPrompt: "아직 HAPA 회원이 아니신가요?",
+      signupLink: "지금 가입하기",
+      findIdLink: "아이디 찾기",
+      findPasswordLink: "비밀번호 찾기",
+      alertFillAllFields: "아이디와 비밀번호를 모두 입력해주세요.",
+      alertLoginSuccess: "로그인 성공!",
+      alertLoginFailed: "로그인 실패: 아이디 또는 비밀번호를 확인해주세요.",
+      alertLoginError: "로그인 중 오류가 발생했습니다.",
+      orDivider: "또는",
+      socialLoginPrompt: "소셜 계정으로 로그인",
+      googleLogin: "Google로 로그인",
+      kakaoLogin: "카카오톡으로 로그인",
+      appleLogin: "Apple로 로그인",
+    },
+    signupPage: {
+      title: "회원가입",
+      step1Title: "회원가입 방법 선택",
+      step2Title: "기본 정보 입력",
+      step3Title: "계정 정보 입력",
+      socialSignupPrompt: "소셜 계정으로 회원가입",
+      googleSignup: "Google로 회원가입",
+      kakaoSignup: "카카오톡으로 회원가입",
+      appleSignup: "Apple로 회원가입",
+      orDivider: "또는",
+      traditionalSignupPrompt: "이메일로 회원가입",
+      countryLabel: "국가",
+      phoneNumberLabel: "전화번호",
+      phoneNumberPlaceholder: "전화번호를 입력하세요 (예: 01012345678)",
+      emailLabel: "이메일",
+      emailLocalPartPlaceholder: "이메일 아이디",
+      emailDomainPlaceholder: "도메인",
+      emailCustomDomainPlaceholder: "직접 입력",
+      userIdLabel: "아이디",
+      userIdPlaceholder: "아이디를 입력하세요",
+      passwordLabel: "비밀번호",
+      passwordPlaceholder: "비밀번호를 입력하세요",
+      confirmPasswordLabel: "비밀번호 확인",
+      confirmPasswordPlaceholder: "비밀번호를 다시 입력하세요",
+      developerLevelLabel: "개발자 수준",
+      developerLevelPlaceholder: "개발자 수준을 선택하세요",
+      nextButton: "다음",
+      previousButton: "이전",
+      signupButton: "회원가입",
+      validation: {
+        digitsOnly: "숫자만 입력해주세요.",
+        invalidLength: "전화번호 길이가 올바르지 않습니다.",
+        invalidPrefix: "010으로 시작하는 11자리 번호를 입력해주세요.",
+        invalidEmailFormat: "유효한 이메일 형식이 아닙니다.",
+        userIdRequired: "아이디를 입력해주세요.",
+        userIdMinLength: "아이디는 6자 이상이어야 합니다.",
+        userIdPattern:
+          "아이디는 영문 소문자, 숫자, 마침표(.), 밑줄(_)만 포함해야 합니다.",
+        userIdAvailabilityChecking: "아이디 중복 확인 중...",
+        userIdAvailable: "사용 가능한 아이디입니다.",
+        userIdNotAvailable: "이미 사용 중인 아이디입니다.",
+        userIdCheckRequired: "아이디 중복 확인이 필요합니다.",
+        passwordMinLength: "비밀번호는 최소 10자 이상이어야 합니다.",
+        passwordLettersAndCase:
+          "비밀번호는 영문 대소문자를 모두 포함해야 합니다.",
+        numbers: "비밀번호는 숫자를 포함해야 합니다.",
+        specialChars: "비밀번호는 특수문자를 포함해야 합니다.",
+        passwordInvalidChars:
+          "비밀번호에 유효하지 않은 문자가 포함되어 있습니다.",
+        passwordMatch: "비밀번호가 일치하지 않습니다.",
+        allFieldsRequired: "모든 필드를 입력해주세요.",
+      },
+      modalTitle: "회원가입",
+      signupSuccess: "회원가입이 성공적으로 완료되었습니다!",
+      signupFailed: "회원가입에 실패했습니다. 다시 시도해주세요.",
+      alertInvalidPhoneNumber: "유효한 전화번호를 입력해주세요.",
+      alertInvalidEmail: "유효한 이메일 주소를 입력해주세요.",
+      alertInvalidUserId: "아이디 형식이 올바르지 않습니다.",
+      alertInvalidPassword: "비밀번호 형식이 올바르지 않습니다.",
+      alertPasswordMismatch: "비밀번호가 일치하지 않습니다.",
+      alertSelectDeveloperLevel: "개발자 수준을 선택해주세요.",
+      alertAllFieldsRequired: "모든 필수 필드를 올바르게 채워주세요.",
+      agreeToTerms: "약관 동의",
+      termsContent: "여기에 약관 내용이 들어갑니다.",
+      privacyPolicyContent: "여기에 개인정보 처리방침 내용이 들어갑니다.",
+    },
+    communityPage: {
+      title: "커뮤니티",
+      totalPosts: "총 게시글",
+      writeButton: "글쓰기",
+      author: "작성자",
+      titleLabel: "제목",
+      contentLabel: "내용",
+      creationDate: "작성일",
+      viewCount: "조회수",
+      noPosts: "게시글이 없습니다.",
+      postDetail: "게시글 상세",
+      editButton: "수정",
+      deleteButton: "삭제",
+      confirmDelete: "정말로 이 게시글을 삭제하시겠습니까?",
+      comments: "댓글",
+      addComment: "댓글 추가",
+      enterComment: "댓글을 입력하세요...",
+      commentButton: "등록",
+      editPost: "게시글 수정",
+      editTitle: "제목 수정",
+      editContent: "내용 수정",
+      saveChanges: "변경 사항 저장",
+      commentCount: "댓글 수",
+      postAuthor: "작성자",
+      postDate: "작성일",
+      postViews: "조회수",
+      postContentPlaceholder: "내용을 입력하세요",
+      alertFillAllFields: "모든 필드 (제목, 내용, 작성자)를 채워주세요.",
+      alertPostSuccess: "게시글이 성공적으로 작성되었습니다!",
+      fileUploadSuccess: "파일이 성공적으로 업로드되었습니다.",
+      alertPostFailed: "게시글 작성에 실패했습니다. 다시 시도해주세요.",
+      fileUploadFailed: "파일 업로드에 실패했습니다.",
+      cancelButton: "취소",
+      submitButton: "제출",
+      loading: "불러오는 중...", // 추가
+      firstPage: "처음", // 추가
+      lastPage: "마지막", // 추가
+      fetchError: "게시글을 불러오는 중 오류가 발생했습니다.", // 추가
+      backToList: "목록", // 추가
+      yesButton: "예", // 추가
+      noButton: "아니오", // 추가
+    },
+    postWritePage: {
+      title: "게시글 작성", // 이 부분이 정의되어 있어야 합니다.
+      postTitleLabel: "제목",
+      fileLabel: "파일 첨부",
+      postContentLabel: "내용",
+      postTitlePlaceholder: "제목을 입력하세요",
+      postContentPlaceholder: "내용을 입력하세요...",
+      alertFillAllFields: "제목과 내용을 모두 입력해주세요.",
+      alertPostSuccess: "게시글이 성공적으로 작성되었습니다!",
+      alertPostFailed: "게시글 작성에 실패했습니다.",
+      cancelButton: "취소",
+      submitButton: "작성",
+      submitting: "작성 중...", // 추가
+      fileUploadNote: "최대 5개 파일 (각 5MB 이하) 첨부 가능", // 추가
+      filesSelected: "선택된 파일", // 추가
+      removeFile: "제거", // 추가
+      successMessage: "게시글이 성공적으로 작성되었습니다!", // 추가
+      errorMessage: "게시글 작성에 실패했습니다.", // 추가
+      fetchError: "게시글 작성 중 오류가 발생했습니다.", // 추가
+    },
+    postDetailPage: {
+      // 새로운 섹션 추가
+      translateButton: "번역",
+      showOriginalButton: "원본 보기",
+      loadingTranslation: "번역 중...",
+      translationError: "번역에 실패했습니다.",
+      mentionPreviewLabel: "댓글 미리보기", // 추가
+      notificationsTitle: "알림", // 추가
+      noNotifications: "새 알림이 없습니다.", // 추가
+      mentionedYou: "님이 회원님을 언급했습니다.", // 추가
+      mentionedInComment: "댓글에서 ", // 추가
+      mentionedInPost: "게시글에서 ", // 추가
+      viewPost: "게시글 보기", // 추가
+    },
+    findAccount: {
+      findIdTitle: "아이디 찾기",
+      findPasswordTitle: "비밀번호 찾기",
+      phoneNumber: "전화번호",
+      email: "이메일",
+      enterPhoneNumber: "전화번호를 입력하세요",
+      enterEmail: "이메일을 입력하세요",
+      enterId: "아이디를 입력하세요",
+      sendVerificationCode: "인증 코드 전송",
+      verifyCode: "코드 확인",
+      codePlaceholder: "인증 코드를 입력하세요",
+      newPasswordLabel: "새 비밀번호",
+      newPasswordPlaceholder: "새 비밀번호를 입력하세요",
+      confirmNewPasswordLabel: "새 비밀번호 확인",
+      confirmNewPasswordPlaceholder: "새 비밀번호를 다시 입력하세요",
+      resetPasswordButton: "비밀번호 재설정",
+      verificationCodeSent: "인증 코드가 전송되었습니다.",
+      userNotFound: "제공된 정보로 사용자를 찾을 수 없습니다.",
+      invalidVerificationCode: "유효하지 않은 인증 코드입니다.",
+      passwordResetSuccess: "비밀번호가 성공적으로 재설정되었습니다.",
+      passwordResetFailed: "비밀번호 재설정에 실패했습니다.",
+      foundId: "회원님의 아이디는",
+    },
+  },
+  en: {
+    header: {
+      autodesk: "HAPA",
+      globeIcon: "🌐",
+      personIcon: "👤",
+      login: "Login",
+      chat: "Chat",
+      products: "Products",
+      support: "Support",
+      learn: "Learn",
+      community: "Community",
+      signup: "Sign Up",
+      currentLanguageDisplay: "EN",
+      koSelectedMessage: "Korean is selected",
+      enSelectedMessage: "English is selected",
+      productsSelectedMessage: "Products selected",
+      learnSelectedMessage: "Learn selected",
+      communitySelectedMessage: "Community selected",
+    },
+    footer: {
+      copyright: "Copyright",
+      location: "Magok, Seoul, Republic of Korea",
+      tel: "Tel: 010-7184-7619",
+    },
+    homePage: {
+      titlePart1: "HAPA",
+      titlePart2: "your own Python programmer",
+      exploreButton: "Explore",
+    },
+    loginPage: {
+      title: "Log in to your HAPA account",
+      welcomeMessage: "Welcome, ",
+      idLabel: "ID or Email",
+      idPlaceholder: "Enter your ID or email address",
+      passwordLabel: "Password",
+      passwordPlaceholder: "Enter your password",
+      loginButton: "Login",
+      signupPrompt: "Not yet a HAPA member?",
+      signupLink: "Sign Up Now",
+      findIdLink: "Find ID",
+      findPasswordLink: "Find Password",
+      alertFillAllFields: "Please fill in all fields (ID and Password).",
+      alertLoginSuccess: "Login successful!",
+      alertLoginFailed: "Login failed: Please check your ID or password.",
+      alertLoginError: "An error occurred during login.",
+      orDivider: "OR",
+      socialLoginPrompt: "Log in with a social account",
+      googleLogin: "Log in with Google",
+      kakaoLogin: "Log in with KakaoTalk",
+      appleLogin: "Log in with Apple",
+    },
+    signupPage: {
+      title: "Sign Up",
+      step1Title: "Choose Sign Up Method",
+      step2Title: "Enter Basic Information",
+      step3Title: "Enter Account Information",
+      socialSignupPrompt: "Sign up with a social account",
+      googleSignup: "Sign up with Google",
+      kakaoSignup: "Sign up with KakaoTalk",
+      appleSignup: "Sign up with Apple",
+      orDivider: "OR",
+      traditionalSignupPrompt: "Sign up with Email",
+      countryLabel: "Country",
+      phoneNumberLabel: "Phone Number",
+      phoneNumberPlaceholder: "Enter your phone number (e.g., 01012345678)",
+      emailLabel: "Email",
+      emailLocalPartPlaceholder: "Email ID",
+      emailDomainPlaceholder: "Domain",
+      emailCustomDomainPlaceholder: "Enter manually",
+      userIdLabel: "ID",
+      userIdPlaceholder: "Enter your ID",
+      passwordLabel: "Password",
+      passwordPlaceholder: "Enter your password",
+      confirmPasswordLabel: "Confirm Password",
+      confirmPasswordPlaceholder: "Re-enter your password",
+      developerLevelLabel: "Developer Level",
+      developerLevelPlaceholder: "Select your developer level",
+      nextButton: "Next",
+      previousButton: "Previous",
+      signupButton: "Sign Up",
+      validation: {
+        digitsOnly: "Please enter digits only.",
+        invalidLength: "Phone number length is invalid.",
+        invalidPrefix: "Please enter an 11-digit number starting with 010.",
+        invalidEmailFormat: "Invalid email format.",
+        userIdRequired: "Please enter an ID.",
+        userIdMinLength: "ID must be at least 6 characters long.",
+        userIdPattern:
+          "ID can only contain lowercase English letters, numbers, periods (.), and underscores (_).",
+        userIdAvailabilityChecking: "Checking ID availability...",
+        userIdAvailable: "ID is available.",
+        userIdNotAvailable: "ID is already in use or invalid.",
+        userIdCheckRequired: "ID availability check is required.",
+        passwordMinLength: "Password must be at least 10 characters long.",
+        passwordLettersAndCase:
+          "Password must include both uppercase and lowercase English letters.",
+        numbers: "Password must include numbers.",
+        specialChars: "Password must include special characters.",
+        passwordInvalidChars: "Password contains invalid characters.",
+        passwordMatch: "Passwords do not match.",
+        allFieldsRequired: "Please fill in all fields.",
+      },
+      modalTitle: "Sign Up",
+      signupSuccess: "Sign up completed successfully!",
+      signupFailed: "Sign up failed. Please try again.",
+      alertInvalidPhoneNumber: "Please enter a valid phone number.",
+      alertInvalidEmail: "Please enter a valid email address.",
+      alertInvalidUserId: "Invalid ID format.",
+      alertInvalidPassword: "Invalid password format.",
+      alertPasswordMismatch: "Passwords do not match.",
+      alertSelectDeveloperLevel: "Please select your developer level.",
+      alertAllFieldsRequired: "Please correctly fill in all required fields.",
+      agreeToTerms: "Agree to Terms",
+      termsContent: "Terms and conditions content goes here.",
+      privacyPolicyContent: "Privacy policy content goes here.",
+    },
+    communityPage: {
+      title: "Community",
+      totalPosts: "Total Posts",
+      writeButton: "Write Post",
+      author: "Author",
+      titleLabel: "Title",
+      contentLabel: "Content",
+      creationDate: "Creation Date",
+      viewCount: "View Count",
+      noPosts: "No posts yet.",
+      postDetail: "Post Detail",
+      editButton: "Edit",
+      deleteButton: "Delete",
+      confirmDelete: "Are you sure you want to delete this post?",
+      comments: "Comments",
+      addComment: "Add Comment",
+      enterComment: "Enter your comment...",
+      commentButton: "Submit",
+      editPost: "Edit Post",
+      editTitle: "Edit Title",
+      editContent: "Edit Content",
+      saveChanges: "Save Changes",
+      commentCount: "Comment Count",
+      postAuthor: "Author",
+      postDate: "Date",
+      postViews: "Views",
+      postContentPlaceholder: "Enter content",
+      alertFillAllFields: "Please fill in all fields (Title, Content, Author).",
+      fileUploadSuccess: "File uploaded successfully.",
+      alertPostFailed: "Failed to create post. Please try again.",
+      fileUploadFailed: "Failed to upload file.",
+      cancelButton: "Cancel",
+      submitButton: "Submit",
+      loading: "Loading...", // 추가
+      firstPage: "First", // 추가
+      lastPage: "Last", // 추가
+      fetchError: "An error occurred while fetching posts.", // 추가
+      backToList: "List", // 추가
+      yesButton: "Yes", // 추가
+      noButton: "No", // 추가
+    },
+    postWritePage: {
+      title: "Write Post", // This property must be defined.
+      postTitleLabel: "Title",
+      fileLabel: "Attach File",
+      postContentLabel: "Content",
+      postTitlePlaceholder: "Enter title",
+      postContentPlaceholder: "Enter content...",
+      alertFillAllFields: "Please fill in both title and content.",
+      alertPostSuccess: "Post created successfully!",
+      alertPostFailed: "Failed to create post.",
+      cancelButton: "Cancel",
+      submitButton: "Submit",
+      submitting: "Submitting...", // 추가
+      fileUploadNote: "Max 5 files (5MB each) can be attached.", // 추가
+      filesSelected: "Files Selected", // 추가
+      removeFile: "Remove", // 추가
+      successMessage: "Post created successfully!", // 추가
+      errorMessage: "Failed to create post.", // 추가
+      fetchError: "An error occurred while creating the post.", // 추가
+    },
+    postDetailPage: {
+      // New section added
+      translateButton: "Translate",
+      showOriginalButton: "Show Original",
+      loadingTranslation: "Translating...",
+      translationError: "Translation failed.",
+      mentionPreviewLabel: "Comment Preview", // 추가
+      notificationsTitle: "Notifications", // 추가
+      noNotifications: "No new notifications.", // 추가
+      mentionedYou: " mentioned you.", // 추가
+      mentionedInComment: "In a comment, ", // 추가
+      mentionedInPost: "In a post, ", // 추가
+      viewPost: "View Post", // 추가
+    },
+    findAccount: {
+      findIdTitle: "Find ID",
+      findPasswordTitle: "Find Password",
+      phoneNumber: "Phone Number",
+      email: "Email",
+      enterPhoneNumber: "Enter your phone number",
+      enterEmail: "Enter your email",
+      enterId: "Enter your ID",
+      sendVerificationCode: "Send Verification Code",
+      verifyCode: "Verify Code",
+      codePlaceholder: "Enter verification code",
+      newPasswordLabel: "New Password",
+      newPasswordPlaceholder: "Enter new password",
+      confirmNewPasswordLabel: "Confirm New Password",
+      confirmNewPasswordPlaceholder: "Confirm new password",
+      resetPasswordButton: "Reset Password",
+      verificationCodeSent: "Verification code has been sent.",
+      userNotFound: "User not found with the provided information.",
+      invalidVerificationCode: "Invalid verification code.",
+      passwordResetSuccess: "Password has been reset successfully.",
+      passwordResetFailed: "Failed to reset password.",
+      foundId: "Your ID is",
+    },
+  },
+};
+
+export default strings;
