@@ -55,7 +55,7 @@ function App() {
         {" "}
         {/* 메인 콘텐츠와 오른쪽 패널을 위한 flex 컨테이너 */}
         {/* 메인(왼쪽) - 기존의 mainComponent를 포함 */}
-        <div className="flex-grow min-w-0 max-w-full p-8 flex flex-col">
+        <div className="flex-grow min-w-0 max-w-full p-8 flex flex-col main-layout-container">
           {mainComponent}
         </div>
         {/* 오른쪽 패널 */}

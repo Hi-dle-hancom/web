@@ -1,7 +1,7 @@
-// src/components/TeamMember/MainLayout.js
 import React, { useState } from "react";
 import { jsPDF } from "jspdf";
 import { notoSansKRBase64 } from "../../assets/fonts/NotoSansKR_base64.js"; // .js 확장자 명시
+import "../../index.css"; // CSS 파일 import
 
 const MainLayout = ({ chats, setChats, setLatestAnswer }) => {
   const [input, setInput] = useState("");
@@ -52,8 +52,8 @@ const MainLayout = ({ chats, setChats, setLatestAnswer }) => {
   };
 
   return (
-    <>
-      <div className="flex items-end gap-4 bg-gray-800 dark:bg-gray-900 rounded-2xl border-2 border-gray-700 dark:border-gray-800 p-4 mb-5">
+    <div>
+      <div className="flex items-end gap-4 rounded-2xl border-2 p-4 mb-5 input-area-container">
         <textarea
           id="input"
           value={input}
@@ -65,33 +65,35 @@ const MainLayout = ({ chats, setChats, setLatestAnswer }) => {
             }
           }}
           placeholder="질문을 입력하세요..."
-          className="flex-1 border-none bg-transparent text-white dark:text-gray-50 resize-none min-h-[40px] max-h-[150px] overflow-y-auto p-2 focus:outline-none"
+          className="flex-1 border-none resize-none min-h-[40px] max-h-[150px] overflow-y-auto p-2 focus:outline-none input-textarea"
         ></textarea>
         <button
           id="send"
           onClick={handleSend}
-          className="bg-blue-600 hover:bg-blue-700 text-white border-none rounded-lg py-2 px-4 text-base font-semibold cursor-pointer flex-shrink-0 transition-colors duration-200"
+          className="border-none rounded-lg py-2 px-4 text-base font-semibold cursor-pointer flex-shrink-0 transition-colors duration-200 send-button"
         >
           보내기
         </button>
       </div>
-      <div className="bg-gray-800 dark:bg-gray-900 rounded-2xl border-2 border-gray-700 dark:border-gray-800 p-4 mb-5">
-        <div className="text-lg font-semibold text-blue-500 dark:text-blue-400 mb-2 flex items-center gap-2">
+      <div className="rounded-2xl border-2 p-4 mb-5 history-container">
+        <div className="text-lg font-semibold mb-2 flex items-center gap-2 history-title">
           <span className="text-xl">🕘</span> 최근 질문 히스토리
         </div>
         <div className="min-h-[70px] max-h-[200px] overflow-y-auto flex flex-col gap-3">
           {history.length === 0 && (
-            <div className="text-gray-500 text-center p-4">최근 질문 없음</div>
+            <div className="text-center p-4 no-history-message">
+              최근 질문 없음
+            </div>
           )}
           {history.map((txt) => (
             <div
-              className="bg-gray-700 dark:bg-gray-800 border border-gray-600 dark:border-gray-700 rounded-lg p-3 mb-2 text-base font-medium text-white dark:text-gray-50 cursor-pointer flex justify-between items-center transition-colors duration-200 hover:bg-gray-600 dark:hover:bg-gray-700"
+              className="border rounded-lg p-3 mb-2 text-base font-medium cursor-pointer flex justify-between items-center transition-colors duration-200 history-item"
               key={txt}
               onClick={() => setInput(txt)}
             >
               {txt.length > 32 ? txt.slice(0, 32) + "..." : txt}
               <button
-                className="bg-transparent border-none text-red-400 text-xl cursor-pointer"
+                className="bg-transparent border-none text-xl cursor-pointer history-delete-button"
                 title="삭제"
                 onClick={(e) => {
                   e.stopPropagation();
@@ -104,8 +106,8 @@ const MainLayout = ({ chats, setChats, setLatestAnswer }) => {
           ))}
         </div>
       </div>
-      <div className="bg-gray-800 dark:bg-gray-900 rounded-2xl border-2 border-gray-700 dark:border-gray-800 p-4 mb-5">
-        <div className="text-lg font-semibold text-blue-500 dark:text-blue-400 mb-2 flex items-center gap-2">
+      <div className="rounded-2xl border-2 p-4 mb-5 chat-history-container">
+        <div className="text-lg font-semibold mb-2 flex items-center gap-2 chat-history-title">
           <div>
             <span role="img" aria-label="memo" className="text-xl">
               📝
@@ -113,7 +115,7 @@ const MainLayout = ({ chats, setChats, setLatestAnswer }) => {
             전체 채팅 내역
           </div>
           <button
-            className="ml-2 text-sm rounded-md py-1 px-3 border border-gray-600 dark:border-gray-700 bg-gray-700 dark:bg-gray-800 text-white dark:text-gray-50 cursor-pointer font-semibold"
+            className="ml-2 text-sm rounded-md py-1 px-3 border cursor-pointer font-semibold export-pdf-button"
             onClick={handleExportPDF}
           >
             PDF 내보내기
@@ -121,14 +123,14 @@ const MainLayout = ({ chats, setChats, setLatestAnswer }) => {
         </div>
         <div className="min-h-[70px] max-h-[200px] overflow-y-auto flex flex-col gap-3">
           {chats.length === 0 && (
-            <div className="text-gray-500 text-center p-4">채팅 내역 없음</div>
+            <div className="text-center p-4 no-chat-message">
+              채팅 내역 없음
+            </div>
           )}
           {chats.slice(-20).map((chat, idx) => (
             <div
-              className={`p-3 rounded-xl text-base font-semibold m-0 ${
-                chat.type === "question"
-                  ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white self-start max-w-[85%]"
-                  : "bg-gray-700 dark:bg-gray-800 text-white dark:text-gray-50 self-end max-w-[85%]"
+              className={`p-3 rounded-xl text-base font-semibold m-0 chat-bubble ${
+                chat.type === "question" ? "question-bubble" : "answer-bubble"
               }`}
               key={idx}
             >
@@ -137,7 +139,7 @@ const MainLayout = ({ chats, setChats, setLatestAnswer }) => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

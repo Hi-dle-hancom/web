@@ -4,7 +4,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom"; // BrowserRouter 임포트
 import App from "./App";
-import "./index.css"; // 전역 CSS
+import "./index.css"; // CSS 파일 import
 
 // LanguageProvider도 App 위에 있어야 합니다.
 import { LanguageProvider } from "./context/LanguageContext";

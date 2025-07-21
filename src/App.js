@@ -1,43 +1,66 @@
 // src/App.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import Header from "./components/Header.old"; // 사용자님의 Header.js 컴포넌트 임포트
-import Footer from "./components/Footer"; // Footer 컴포넌트 임포트
-import HomePage from "./pages/Homepage"; // HomePage 컴포넌트 임포트
-import "./index.css"; // 전역 CSS (필수 리셋 및 폰트 등)
+import Header from "./components/Header.old";
+import Footer from "./components/Footer";
+import HomePage from "./pages/Homepage";
+import "./index.css";
 
-import { useLanguage } from "./context/LanguageContext"; // LanguageContext 임포트
-import strings from "./locales/strings"; // 문자열 파일 임포트
-import SignupPage from "./pages/SignupPage"; // SignupPage 임포트
-import LoginPage from "./pages/LoginPage"; // LoginPage 임포트
-import CommunityPage from "./pages/CommunityPage"; // CommunityPage 임포트
-import PostWritePage from "./pages/PostWritePage"; // PostWritePage 임포트
-import PostDetailPage from "./pages/PostDetailPage"; // PostDetailPage 임포트
+import { useLanguage } from "./context/LanguageContext";
+import strings from "./locales/strings";
+import CommunityPage from "./pages/CommunityPage";
+import PostWritePage from "./pages/PostWritePage";
+import PostDetailPage from "./pages/PostDetailPage";
 
-// 팀원분의 App.tsx 컴포넌트 임포트 시 다른 이름 사용 (예: TeamMemberApp)
-// 파일 경로와 이름은 실제 프로젝트 구조에 맞게 조정하세요.
-// 예: src/App_member.tsx 파일이 있다면 아래와 같이 임포트합니다.
-import TeamMemberApp from "./App_member";
+import TeamMemberApp from "./App_member"; // 팀원분의 App.tsx 컴포넌트 임포트
 
 // 각 페이지 컴포넌트를 인라인으로 정의하여 strings에서 텍스트를 직접 가져옴
 const StaticPage = ({ textKey }) => {
   const { language } = useLanguage();
   return (
     // StaticPage 컴포넌트에도 다크 모드 배경색과 텍스트 색상 클래스 적용
-    <div className="min-h-screen flex items-center justify-center text-white bg-gray-900">
+    <div className="min-h-screen flex items-center justify-center static-page-bg static-page-text">
       {strings[language][textKey]}
     </div>
   );
 };
 
 function App() {
-  // 사용자님의 메인 App 컴포넌트
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const [currentHomePageSection, setCurrentHomePageSection] = useState("");
   const [currentHomePageScrollOffset, setCurrentHomePageScrollOffset] =
     useState(0);
   const [resetHomePageTrigger, setResetHomePageTrigger] = useState(0);
+
+  // 다크 모드 상태 추가
+  // 로컬 스토리지 또는 OS 테마 설정을 기반으로 초기 테마 설정
+  const [isDark, setIsDark] = useState(
+    () =>
+      localStorage.getItem("theme") === "dark" ||
+      (localStorage.getItem("theme") === null &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+  );
+
+  // isDark 상태 변경 시 body 클래스 업데이트
+  useEffect(() => {
+    // 기존의 모든 테마 관련 클래스를 제거하여 깨끗한 상태에서 시작합니다.
+    document.body.classList.remove("dark", "light");
+
+    if (isDark) {
+      document.body.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      // isDark가 false일 때 'light' 클래스를 추가합니다.
+      document.body.classList.add("light");
+      localStorage.setItem("theme", "light");
+    }
+  }, [isDark]); // isDark 상태가 변경될 때마다 이 효과를 다시 실행
+
+  // 다크 모드 토글 함수
+  const toggleDarkMode = () => {
+    setIsDark((prevIsDark) => !prevIsDark);
+  };
 
   const handleHomePageSectionChange = (sectionId, scrollOffset) => {
     setCurrentHomePageSection(sectionId);
@@ -50,11 +73,14 @@ function App() {
 
   return (
     // 최상위 div에는 특별한 배경색을 지정하지 않아 body의 다크 모드 영향을 받도록 합니다.
+    // body의 기본 배경색이 var(--color-background-primary)로 설정되어 있으므로, App 컴포넌트는 별도의 bg 클래스가 필요 없습니다.
     <div className="App">
-      {/* Header 컴포넌트는 사용자님의 기존 Header.js를 사용하며,
-          여기에 onResetHomePage prop을 전달합니다.
-          Header.js 파일이 최신 통합 버전 (Demo 메뉴 포함)인지 확인해주세요. */}
-      <Header onResetHomePage={handleResetHomePage} />
+      {/* Header 컴포넌트에 isDark와 toggleDarkMode props 전달 */}
+      <Header
+        onResetHomePage={handleResetHomePage}
+        isDark={isDark}
+        toggleDarkMode={toggleDarkMode}
+      />
       <main className="pt-16 min-h-screen">
         {" "}
         {/* 헤더 높이만큼 paddingTop 추가 */}
@@ -71,26 +97,12 @@ function App() {
           {/* HomePage에 resetTrigger prop 전달 */}
           <Route path="/a" element={<StaticPage textKey="pageA" />} />
           <Route path="/b" element={<StaticPage textKey="pageB" />} />
-          <Route path="/login" element={<LoginPage />} />{" "}
-          {/* LoginPage 컴포넌트 직접 렌더링 */}
-          <Route path="/signup" element={<SignupPage />} />
-          {/* HAPA 웹사이트 하단 메뉴에 대응하는 라우트들 */}
-          <Route
-            path="/products"
-            element={<StaticPage textKey="productsPage" />}
-          />
-          <Route
-            path="/support"
-            element={<StaticPage textKey="supportPage" />}
-          />
-          <Route path="/learn" element={<StaticPage textKey="learnPage" />} />
           <Route path="/community" element={<CommunityPage />} />{" "}
           {/* CommunityPage 컴포넌트 렌더링 */}
           <Route path="/community/write" element={<PostWritePage />} />{" "}
           {/* PostWritePage 라우트 추가 */}
           <Route path="/community/:postId" element={<PostDetailPage />} />{" "}
           {/* PostDetailPage 라우트 추가 */}
-          {/* 새로운 Demo 페이지 라우트 추가: TeamMemberApp 컴포넌트를 렌더링합니다. */}
           <Route path="/demo" element={<TeamMemberApp />} />
         </Routes>
       </main>

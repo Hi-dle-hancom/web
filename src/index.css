@@ -1,33 +1,748 @@
-    /* src/index.css */
+/* index.css */
 
-    /* Tailwind CSS 지시문은 여기에 없어야 합니다. */
-    /* @tailwind base; */
-    /* @tailwind components; */
-    /* @tailwind utilities; */
+/* 기본 리셋 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    /* 기본 리셋 */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+/* 전역 HTML, Body, Root 스타일 */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans KR", "Noto Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-    /* 전역 HTML, Body, Root 스타일 (Tailwind가 직접 처리하기 어려운 부분) */
-    html,
-    body,
-    #root {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      font-family: "Noto Sans KR", "Noto Sans", sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
 
-    /* 'code' 태그 스타일 */
-    code {
-      font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-        monospace;
-    }
+/* 'code' 태그 스타일 */
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
 
-    /* 나머지 모든 스타일은 Tailwind CSS 클래스로 React 컴포넌트에 직접 적용됩니다. */
+/* 🌈 기본/라이트 모드 색상 변수 정의 (기본값) */
+.light {
+  /* 배경 색상 */
+  --color-bg-primary: #FFFBDE;
+  --nav-button-color: #000000;
+  --nav-button-bg: #38cab5;
+  /* 순수 흰색 (메인 배경 및 부모 박스) */
+  --color-bg-secondary: #FAF7F3;
+  /* 아주 연한 베이지색 (콘텐츠 박스 배경) */
+  --color-bg-tertiary: #F0F0F0;
+  /* 약간 더 진한 밝은 회색 (3차 영역, ex: 호버 상태) */
+  --main-layout-box: #FAF7F3;
+  /* 진한 차콜/블루 그레이 (헤더, 푸터, 탑네비 배경) */
+  --color-bg-dark-element-alt: #37474F;
+  /* 중간 차콜/블루 그레이 (어두운 요소 내 보조 배경) */
+  --color-bg-deep-dark: #1C2A30;
+  /* 더 깊은 차콜/블루 그레이 */
+  --color-bg-even-deeper-dark: #1A2327;
+  --send-button-bg: #38cab5;
+  /* 가장 깊은 차콜/블루 그레이 */
+  --main-layout-container-bg: #FFFBDE;
+  --answer-box-bg: #38cab5;
+  --text-input-area-bg: #FAF7F3;
+
+  /* 텍스트 색상 */
+  --color-text-primary: #212121;
+  /* 진한 검정색 (밝은 배경에 가독성 최고) */
+  --color-text-secondary: #424242;
+  /* 약간 연한 차콜색 */
+  --color-text-light: #000000;
+  /* 흰색 (어두운 배경 위 텍스트) */
+  --color-text-mid-light: #616161;
+  /* 중간 밝기의 회색 */
+  --color-text-soft: #757575;
+  /* 부드러운 회색 */
+  --color-text-muted: #9E9E9E;
+  /* 음소거된 회색 */
+  --color-text-disabled: #BDBDBD;
+  /* 비활성화된 회색 */
+  --color-text-super-light: #EEEEEE;
+  /* 가장 밝은 회색 */
+
+  /* 파란색 계열 (강조 색상) */
+  --color-blue-primary: #007BFF;
+  /* 표준 파란색 (주요 액션, 강조) */
+  --color-blue-dark: #0056B3;
+  /* 어두운 파란색 (호버 상태) */
+  --color-blue-light: #66B2FF;
+  /* 밝은 파란색 (활성 탭 밑줄, 특정 강조) */
+  --color-blue-lighter: #ADD8E6;
+  /* 더 밝은 파란색 (답변 버블 배경 등) */
+  --color-blue-even-lighter: #CCE5FF;
+  /* 더더욱 밝은 파란색 */
+  --color-blue-soft: #EBF5FF;
+  /* 매우 부드러운 파란색 */
+  --color-blue-softer: #F0F8FF;
+  /* 가장 부드러운 파란색 */
+  --color-blue-deep: #004085;
+  /* 깊은 파란색 */
+
+  /* 빨간색 계열 */
+  --color-red-primary: #DC3545;
+  /* 표준 빨간색 */
+  --color-red-dark: #C82333;
+  /* 어두운 빨간색 */
+  --color-red-light: #FF697E;
+  /* 밝은 빨간색 */
+  --color-red-deep: #A51C2C;
+  /* 깊은 빨간색 */
+
+  /* 녹색 계열 */
+  --color-green-primary: #28A745;
+  /* 표준 녹색 */
+  --color-green-dark: #218838;
+  /* 어두운 녹색 */
+
+  /* 경계선 색상 */
+  --color-border-default: #E0E0E0;
+  /* 기본 경계선 색상 (연한 회색) */
+  --color-border-dark: #B0B0B0;
+  /* 어두운 경계선 색상 (중간 회색) */
+  --color-border-light: #F0F0F0;
+  /* 연한 경계선 색상 (아주 연한 회색) */
+
+  /* 그림자 색상 */
+  --color-shadow: rgba(0, 0, 0, 0.08);
+  /* 밝은 그림자 */
+
+  /* 특정 요소 색상 */
+  --color-dot-navigation: #BDBDBD;
+  /* 점 네비게이션 기본 (중간 회색) */
+  --color-dot-navigation-hover: #9E9E9E;
+  /* 점 네비게이션 호버 (조금 더 진한 회색) */
+  --color-dot-navigation-active: #007BFF;
+  /* 점 네비게이션 활성 (강조 파란색) */
+
+  --color-notification-badge: #DC3545;
+  /* 알림 뱃지 (빨간색) */
+  --color-notification-dot: #007BFF;
+  /* 알림 점 (강조 파란색) */
+
+  --color-success-message: #28A745;
+  /* 성공 메시지 (녹색) */
+}
+
+
+/* 🌙 다크 모드 테마 색상 변수 정의 */
+.dark {
+  /* 배경 색상 */
+  --color-bg-primary: #111827;
+  --nav-button-color: #FFFBDE;
+  --nav-button-bg: #2563eb;
+  /* 흰색을 기본 배경으로 가정 */
+  --color-bg-secondary: #1f2937;
+  /* 연한 회색 배경 */
+  --color-bg-tertiary: #e5e7eb;
+  /* 중간 회색 배경 */
+  --color-bg-dark-element: #1f2937;
+  /* 푸터, 헤더 등 어두운 요소 배경 (기존 bg-gray-800) */
+  --color-bg-dark-element-alt: #374151;
+  /* 중간 어두운 요소 배경 (기존 bg-gray-700) */
+  --color-bg-deep-dark: #111827;
+  /* 가장 어두운 배경 (기존 bg-gray-900) */
+  --color-bg-even-deeper-dark: #030712;
+  /* 더 어두운 배경 (기존 bg-gray-950) */
+  --main-layout-container-bg: #111827;
+  --main-layout-box: #1f2937;
+  /* 텍스트 색상 */
+  --color-text-primary: #ffffff;
+  /* 기본 어두운 텍스트 (다크모드 전환 시 밝은 색으로) */
+  --color-text-secondary: #374151;
+  /* 약간 밝은 어두운 텍스트 */
+  --color-text-light: #ffffff;
+  /* 흰색 텍스트 */
+  --color-text-mid-light: #e5e7eb;
+  /* 밝은 회색 텍스트 (기존 text-gray-200) */
+  --color-text-soft: #d1d5db;
+  /* 부드러운 회색 텍스트 (기존 text-gray-300) */
+  --color-text-muted: #9ca3af;
+  /* 음소거된 회색 텍스트 (기존 text-gray-400) */
+  --color-text-disabled: #6b7280;
+  /* 비활성화된 회색 텍스트 (기존 text-gray-500) */
+  --color-text-super-light: #f9fafb;
+  /* 가장 밝은 회색 텍스트 (Tailwind gray-50) */
+  --answer-box-bg: #374151;
+  /* 파란색 계열 */
+  --color-blue-primary: #2563eb;
+  /* 기본 파란색 (기존 bg-blue-600, text-blue-500) */
+  --color-blue-dark: #1d4ed8;
+  /* 어두운 파란색 (기존 bg-blue-700, text-blue-700) */
+  --color-blue-light: #3b82f6;
+  /* 밝은 파란색 (기존 text-blue-500, after:bg-blue-500) */
+  --color-blue-lighter: #60a5fa;
+  /* 더 밝은 파란색 (기존 text-blue-400) */
+  --color-blue-even-lighter: #93c5fd;
+  /* 더더욱 밝은 파란색 (기존 text-blue-300) */
+  --color-blue-soft: #eff6ff;
+  /* 매우 부드러운 파란색 (기존 bg-blue-50) */
+  --color-blue-softer: #dbeafe;
+  /* 더 부드러운 파란색 (기존 bg-blue-100) */
+  --color-blue-deep: #1e40af;
+  /* 깊은 파란색 (기존 bg-blue-800) */
+  --send-button-bg: #2563eb;
+  --text-input-area-bg: #1f2937;
+  /* 빨간색 계열 */
+  --color-red-primary: #ef4444;
+  /* 기본 빨간색 (기존 bg-red-500, text-red-500) */
+  --color-red-dark: #dc2626;
+  /* 어두운 빨간색 (기존 bg-red-600, hover:text-red-600) */
+  --color-red-light: #f87171;
+  /* 밝은 빨간색 (기존 hover:text-red-400) */
+  --color-red-deep: #b91c1c;
+  /* 더 깊은 빨간색 (기존 hover:bg-red-700) */
+
+  /* 경계선 색상 */
+  --color-border-default: #4b5563;
+  /* 기본 경계선 색상 (기존 border-gray-600) */
+  --color-border-dark: #374151;
+  /* 어두운 경계선 색상 (기존 border-gray-700) */
+  --color-border-light: #e4e8ee;
+  /* 연한 경계선 색상 (기존 --border) */
+
+  /* 특정 요소 색상 (기존 코드에서 직접 사용되던 것) */
+  --color-dot-navigation: #6b7280;
+  /* 점 네비게이션 기본 (bg-gray-500) */
+  --color-dot-navigation-hover: #9ca3af;
+  /* 점 네비게이션 호버 (hover:bg-gray-400) */
+  --color-dot-navigation-active: #3b82f6;
+  /* 점 네비게이션 활성 (bg-blue-500) */
+
+  --color-notification-badge: #ef4444;
+  /* 알림 뱃지 (bg-red-500) */
+  --color-notification-dot: #3b82f6;
+  /* 알림 점 (bg-blue-500) */
+
+  --color-success-message: #22c55e;
+  /* 성공 메시지 (text-green-500) */
+}
+
+/* 🌙 다크 모드 테마 색상 변수 재정의 */
+/* 이 클래스는 JavaScript로 body 태그에 토글될 것입니다. */
+
+
+/* DotNavigation.css */
+.dot-navigation-container {
+  /* ... 기존 스타일 ... */
+}
+
+.dot-navigation-button {
+  background-color: var(--color-dot-navigation);
+  /* ... 기존 스타일 ... */
+}
+
+.dot-navigation-button:hover {
+  background-color: var(--color-dot-navigation-hover);
+}
+
+.dot-navigation-button-active {
+  background-color: var(--color-dot-navigation-active);
+
+}
+
+/* Footer.css */
+.footer-base {
+  background-color: var(--color-bg-dark-element);
+  color: var(--color-text-muted);
+}
+
+.footer-copyright-badge {
+  background-color: var(--color-border-default);
+  color: var(--color-text-mid-light);
+}
+
+/* Header.css */
+.header-base {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-light);
+  border-bottom: 2px solid var(--color-border-default);
+}
+
+.nav-link,
+.notification-icon,
+.settings-icon,
+.darkmode-btn {
+  color: var(--color-text-soft);
+}
+
+.nav-link:hover,
+.notification-icon:hover,
+.settings-icon:hover,
+.darkmode-btn:hover {
+  color: var(--color-text-light);
+}
+
+.notification-badge {
+  background-color: var(--color-notification-badge);
+  color: var(--color-text-light);
+}
+
+.notification-dropdown,
+.settings-dropdown {
+  background-color: var(--color-bg-dark-element-alt);
+}
+
+.notification-dropdown-title {
+  color: var(--color-text-soft);
+  border-color: var(--color-border-default);
+}
+
+.notification-item:hover,
+.lang-option:hover {
+  background-color: var(--color-border-default);
+}
+
+.notification-item-read {
+  color: var(--color-text-muted);
+}
+
+.notification-item-unread,
+.lang-option {
+  color: var(--color-text-mid-light);
+}
+
+.view-post-link {
+  color: var(--color-blue-lighter);
+}
+
+.notification-unread-dot {
+  background-color: var(--color-notification-dot);
+}
+
+.no-notifications-text {
+  color: var(--color-text-muted);
+}
+
+.user-profile-icon {
+  background-color: var(--color-blue-primary);
+  color: var(--color-text-light);
+}
+
+/* CommunityPage.css */
+.community-page-container,
+.post-detail-page-container,
+.write-page-container,
+.chat-main-container,
+.right-panel-container {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-light);
+}
+
+.community-content-area,
+.post-content-area,
+.write-form-card {
+  background-color: var(--color-bg-primary);
+}
+
+.community-title,
+.write-page-title,
+.post-not-found-text,
+.loading-text,
+.comments-title,
+.post-title,
+.homepage-text-content,
+.homepage-section-text,
+.answer-title,
+.tab-button,
+.token-example-text,
+.token-usage-title,
+.nav-button {
+  color: var(--color-text-primary);
+}
+
+/* 중복되는 .loading-text, .error-text, .no-posts-text 등은 한 곳에서만 정의하거나 변수 사용 */
+.community-total-posts-text {
+  color: var(--color-text-soft);
+}
+
+.write-post-button,
+.explore-button,
+.translate-button,
+.add-comment-button,
+.reply-submit-button,
+.submit-button {
+  background-color: var(--nav-button-bg);
+  color: var(--color-text-light);
+}
+
+.send-button {
+  background-color: var(--send-button-bg);
+  color: var(--color-text-light);
+}
+
+.write-post-button:hover,
+.explore-button:hover,
+.translate-button:hover:not(:disabled),
+.add-comment-button:hover,
+.reply-submit-button:hover,
+.submit-button:hover:not(:disabled),
+.send-button:hover {
+  background-color: var(--nav-button-bg);
+}
+
+.loading-text,
+.no-posts-text,
+.no-comments-text,
+.no-notifications-text,
+.no-history-message,
+.no-chat-message,
+.token-usage-example {
+  /* 중복 클래스 통합 */
+  color: var(--color-text-muted);
+}
+
+.no-answer-text {
+  color: var(--color-text-light);
+}
+
+.error-text,
+.translation-error-text,
+.error-message,
+.history-delete-button,
+.remove-file-button {
+  color: var(--color-red-primary);
+}
+
+.community-table,
+.comment-card,
+.token-box,
+.token-usage-container {
+  background-color: var(--color-bg-dark-element-alt);
+  color: var(--color-text-mid-light);
+}
+
+.table-header-row {
+  background-color: var(--color-border-default);
+  color: var(--color-text-soft);
+}
+
+.table-row-item {
+  border-color: var(--color-border-default);
+  color: var(--color-text-mid-light);
+}
+
+.table-row-item:hover,
+.pagination-button:hover:not(:disabled),
+.cancel-delete-button:hover,
+.back-to-list-button:hover,
+.close-button:hover,
+.history-item:hover {
+  background-color: var(--color-border-default);
+}
+
+.pagination-button {
+  background-color: var(--color-bg-dark-element-alt);
+  color: var(--color-text-soft);
+}
+
+.pagination-button-active {
+  background-color: var(--color-blue-primary);
+  color: var(--color-text-light);
+}
+
+/* HomePage.css - 대부분 CommunityPage.css와 동일한 변수 사용 */
+
+/* PostDetailPage.css */
+.back-to-list-button,
+.cancel-delete-button,
+.cancel-button {
+  background-color: var(--color-border-default);
+  color: var(--color-text-light);
+}
+
+.post-meta-info,
+.comment-date-text,
+.mention-preview-label {
+  color: var(--color-text-muted);
+}
+
+.post-content-text,
+.comment-content,
+.comment-preview {
+  color: var(--color-text-mid-light);
+}
+
+.comments-section {
+  border-color: var(--color-border-dark);
+}
+
+.new-comment-textarea,
+.reply-textarea,
+.text-input,
+.file-input {
+  background-color: var(--text-input-area-bg);
+  color: var(--color-text-light);
+  border-color: var(--color-border-default);
+}
+
+.new-comment-textarea:focus,
+.reply-textarea:focus,
+.text-input:focus,
+.file-input:focus {
+  border-color: var(--nav-button-bg);
+  box-shadow: 0 0 0 3px #38cab5;
+  ;
+  /* Tailwind ring-blue-500 */
+}
+
+.mention-highlight-blue,
+.comment-reply-button {
+  color: var(--color-blue-lighter);
+}
+
+.comment-author-id {
+  color: var(--color-blue-even-lighter);
+}
+
+.comment-delete-button {
+  color: var(--color-text-muted);
+}
+
+.comment-delete-button:hover {
+  color: var(--color-red-light);
+}
+
+.comment-reply-button:hover {
+  color: var(--color-blue-even-lighter);
+}
+
+.reply-textarea {
+  background-color: var(--color-border-default);
+  border-color: var(--color-text-disabled);
+}
+
+.replies-container {
+  border-color: var(--color-border-default);
+}
+
+.delete-confirm-modal-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.delete-confirm-modal-content {
+  background-color: var(--color-bg-dark-element);
+}
+
+.delete-confirm-text {
+  color: var(--color-text-light);
+}
+
+.confirm-delete-button {
+  background-color: var(--color-red-dark);
+  color: var(--color-text-light);
+}
+
+.confirm-delete-button:hover {
+  background-color: var(--color-red-deep);
+}
+
+/* PostWritePage.css */
+.label-text,
+.files-selected-text {
+  color: var(--color-text-light);
+}
+
+.file-label {
+  color: var(--color-text-soft);
+}
+
+.file-input::file-selector-button {
+  background-color: var(--color-blue-soft);
+  color: var(--color-blue-dark);
+}
+
+.file-input::file-selector-button:hover {
+  background-color: var(--color-blue-softer);
+}
+
+.selected-files-list {
+  color: var(--color-text-soft);
+}
+
+.remove-file-button {
+  color: var(--color-red-light);
+}
+
+.remove-file-button:hover {
+  color: var(--color-red-dark);
+}
+
+.file-upload-note {
+  color: var(--color-text-disabled);
+}
+
+.success-message {
+  color: var(--color-success-message);
+}
+
+/* ChatMain.css & MainLayout.css (TeamMember 폴더 내부 중복 제거) */
+/* .input-area-container, .history-container, .chat-history-container를 통합 */
+.input-area-container,
+.history-container,
+.chat-history-container {
+  background-color: var(--main-layout-box);
+  border-color: var(--color-border-dark);
+}
+
+.main-layout-container {
+  background-color: var(--main-layout-container-bg);
+  color: var(--color-text-light);
+}
+
+/* @media (prefers-color-scheme: dark)는 .dark 클래스로 대체되므로 제거 */
+
+.input-textarea {
+  background-color: transparent;
+  color: var(--color-text-light);
+  /* 기본값 */
+}
+
+/* .input-textarea의 다크모드 텍스트 색상은 .dark에서 재정의 */
+.history-title,
+.chat-history-title {
+  color: var(--nav-button-bg);
+}
+
+.history-item,
+.answer-bubble {
+  /* 통합 */
+  background-color: var(--color-bg-dark-element-alt);
+  border-color: var(--color-border-default);
+  color: var(--color-text-light);
+}
+
+.question-bubble {
+  background-image: linear-gradient(to right, var(--color-blue-primary), var(--color-blue-dark));
+  color: var(--color-text-light);
+}
+
+.right-tabs-container,
+.chat-panel-container {
+  /* 통합 */
+  background-color: var(--color-bg-dark-element);
+}
+
+.right-tabs-container {
+  border-left-color: var(--color-border-dark);
+}
+
+/* ChatPanel.css */
+.chat-panel-overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.chat-panel-header {
+  background-color: var(--color-bg-dark-element-alt);
+  color: var(--color-text-light);
+  border-color: var(--color-border-default);
+}
+
+.close-button {
+  background-color: transparent;
+  color: var(--color-text-light);
+}
+
+.chat-panel-body {
+  background-color: var(--color-bg-dark-element);
+}
+
+.question-chat-bubble {
+  background-color: var(--color-blue-primary);
+  color: var(--color-text-light);
+}
+
+.answer-chat-bubble {
+  background-color: var(--color-bg-dark-element-alt);
+  color: var(--color-text-light);
+}
+
+/* RightPanel.css */
+.right-panel-container {
+  border-left-color: var(--color-bg-dark-element);
+}
+
+/* RightTabs.css */
+.tabs-container {
+  border-bottom-color: var(--color-border-dark);
+}
+
+.tab-active {
+  color: var(--nav-button-bg);
+}
+
+.tab-active::after {
+  background-color: var(--nav-button-bg);
+}
+
+.tab-inactive:hover {
+  color: var(--nav-button-bg);
+}
+
+.answer-box,
+.token-box,
+.token-usage-container {
+  background-color: var(--answer-box-bg);
+  border-color: var(--color-border-default);
+}
+
+.answer-text {
+  color: var(--color-text-light);
+}
+
+.token-value,
+.token-usage-value {
+  color: var(--color-blue-light);
+}
+
+/* TeamMemberHeader.css */
+.header-container {
+  background-color: var(--color-bg-dark-element);
+  color: var(--color-text-light);
+  border-bottom-color: var(--color-border-dark);
+}
+
+.theme-toggle-button {
+  background-color: var(--color-bg-dark-element-alt);
+  color: var(--color-text-light);
+  border-color: var(--color-border-default);
+}
+
+/* prefers-color-scheme는 .dark 클래스로 통합되므로 제거 */
+/* body.dark .header-container, .header-container {...} 부분은 .dark {} 블록 안으로 이동 */
+/* body.dark .theme-toggle-button, .theme-toggle-button {...} 부분은 .dark {} 블록 안으로 이동 */
+
+
+/* TopNav.css */
+.top-nav-container {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-light);
+  border-right-color: var(--color-border-default);
+}
+
+.nav-button {
+  color: var(--color-text-light);
+}
+
+.nav-button-active {
+  background-color: var(--nav-button-bg);
+  color: var(--nav-button-color);
+  border-color: var(--color-bg-primary);
+}
+
+.nav-button-inactive {
+  background-color: var(--color-bg-primary);
+  border-color: var(--color-border-default);
+  color: var(--nav-button-color);
+}
+
+.nav-button:hover {
+  opacity: 0.9;
+}
